@@ -23,6 +23,7 @@ def blackjack_names():
 def blackjack_main(player_count, player_name):
     player_cards.clear()
     used_cards = []
+    computer_score = 0
 
     for z in range(len(player_name)):
         blackjack_first_new_card(used_cards)
@@ -45,11 +46,11 @@ def blackjack_main(player_count, player_name):
                 print("OK")
                 draw_more = False
 
-    blackjack_computer(used_cards)
-    blackjack_computer(used_cards)
+    while computer_score < 17:
+        computer_score = blackjack_computer(used_cards)
 
-    for z in range(int(player_count)):
-        print(player_name[z + 1] + "'s cards = " + player_cards[+1])
+    for z in range(len(player_name)):
+        print(player_name[z] + "'s cards = " + player_cards[z])
     blackjack_exit(player_count, player_name)
 
 
@@ -71,17 +72,20 @@ def blackjack_computer(used_cards):
         if computer_score_eleven <= 21:
             if computer_score_eleven < 17:
                 blackjack_new_card(z, used_cards)
+
         elif computer_score_one <= 21:
             if computer_score_one < 17:
                 blackjack_new_card(z, used_cards)
+
         else:
             print("Computer went BUST!!! \nYOU WIN!!!")
     else:
         if computer_score < 17:
             blackjack_new_card(z, used_cards)
+
         elif computer_score > 21:
             print("Computer went BUST!!! \nYOU WIN!!!")
-    print("Computers Cards = " + player_cards[0])
+    return computer_score
 
 
 def blackjack_exit(player_count, player_name):
@@ -109,7 +113,7 @@ def blackjack_first_new_card(used_cards):
 
 
 def blackjack_new_card(z, used_cards):
-    numbers = random.randint(0, 52)
+    numbers = random.randint(0, 51)
     player_card = [str(numbers)]
     if used_cards != player_card:
         used_cards += player_card
