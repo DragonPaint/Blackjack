@@ -12,11 +12,12 @@ player_cards = []
 
 
 def blackjack_names():
+    print("")
     player_name = ["Computer"]
     player_count = input("How many players?, not including the dealer/computer. ")
     for z in range(int(player_count)):
         player_name.append(input("What is player " + str(z + 1) + "'s name? "))
-        print("Player " + str(z + 1) + "'s name is: " + player_name[z])
+        print("Player " + str(z + 1) + "'s name is: " + player_name[z + 1])
     blackjack_main(player_count, player_name)
 
 
@@ -25,6 +26,7 @@ def blackjack_main(player_count, player_name):
     used_cards = []
     computer_score = 0
 
+    print("")
     for z in range(len(player_name)):
         blackjack_first_new_card(used_cards)
         blackjack_new_card(z, used_cards)
@@ -133,9 +135,19 @@ def blackjack_same_players(player_count, player_name):
     blackjack_main(player_count, player_name)
 
 
+def rules():
+    print(
+        '1. Aces may be counted as 1 or 11 points, 2 to 9 according to pip value, and tens and face cards count as ten points.\n'
+        '2. The value of a hand is the sum of the point values of the individual cards.\n Except, a "blackjack" is the highest hand, consisting of an ace and any 10-point card, and it outranks all other 21-point hands.')
+    blackjack_names()
+
 def launcher():
     print("Hello and welcome, GAMBLING IS ILEGAL!!!!! \nBut have fun ")
-    blackjack_names()
+    rules_or_no = input("Do you know the rules? (press: n if you don't) : ")
+    if rules_or_no.lower() == "n":
+        rules()
+    else:
+        blackjack_names()
 
 
 launcher()
